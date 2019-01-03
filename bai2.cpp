@@ -179,8 +179,7 @@ void Chepij(Nut *dau, int i, int j, int k)
 	  }   
 	 }    
  } 
- 
- 
+}
 int main(){
 	int k;
 	NhapVb(dau);
@@ -195,6 +194,6 @@ int main(){
 	DuyetVb(dau);
 	cout<<endl;
 	Chepij(dau,3,4,7);
-	
+
 }
 
