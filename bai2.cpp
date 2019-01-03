@@ -78,7 +78,7 @@ void Indongij(Nut *dau, int i, int j)
  	Nut *p,*q;
 	char tam1[80];	
   	p = new Nut;
-  	cout<<" nhap dong muon chen :";
+  	cout<<" nhap noi dung muon chen :";
   	cin.getline(tam1,80);
   	strcpy(p->nd, tam1);
   	p->truoc =NULL;
@@ -135,65 +135,96 @@ void XoaDongij(Nut *&dau, int i, int j)
 	for(k=i; k<=j;k++)
 	Xoa(dau,i);
 }
-// chep nd dong i -> j vao sau dong k
+// chep nd dong i -> j vao sau dau1
 
-void Chepij(Nut *dau, int i, int j, int k) 
-{    int dem; 
-	 Nut *p,*q,*t,*l; 
-	if(j >= i) 
-		  { // tim i
-		    dem = 1;  
-			p = k;   
-			while(p != NULL && dem != i)  
-			{    
-			p = p->sau;   
-			dem = dem + 1; 
-			 } 
-	if(p != NULL)   
-	{ // tim j   
-	q = p; 
-	 while(q != NULL && dem != j) 
- {    
- 	 q = q->sau; 
-	dem = dem+1;    
-	} 
-   // in ra dong i den dong j. 
-	 if(q != NULL) 
-	 while(p != q->sau)  
-	 { 
-	   //
-	  cout<<p->nd ;
-	  t = new Nut;    
-	strcpy(t->nd,p->nd); 
-	t->sau = NULL;
-	t->truoc = NULL;    
-	if (k == NULL)      
-		k = t;       
-	   else        
-	     {         
-		l->sau = t;         
-		t->truoc = l;    
-		}       
-		l = t;   
-		p = p->sau;  
-	  }   
-	 }    
- } 
+void Chepij(Nut *dau, int i, int j, Nut *&dau1)
+{
+	int dem;
+	Nut *p,*q,*t,*l;
+	if(j >= i)
+	{
+		// tim i
+		dem = 1;
+		p = dau;
+		while(p != NULL && dem != i)
+		{
+			p = p->sau;
+			dem += 1;
+		}
+		if(p != NULL)
+		{
+			// tim j
+			q = p;
+			while(q != NULL && dem != j)
+			{
+				q = q->sau;
+				dem = dem+1;
+			}
+			// in ra dong i den dong j.
+			if(q != NULL)
+			while(p != q->sau)
+			{
+				
+				t = new Nut;
+				strcpy(t->nd,p->nd);
+				t->sau = NULL;
+				t->truoc = NULL;
+				if (dau1 == NULL)
+					dau1 = t;
+				else
+				{
+					l->sau=t;
+					t->truoc=l;
+				}
+				l = t;
+				p = p->sau;
+			}
+		}
+	}
+}
+// chep nd dong i -> j vao sau dong k
+void Chendongij(Nut *&dau,int i, int j, int k)
+{
+	int m;
+	Nut *a,*b,*w;
+	a = dau;
+	m = 1;
+	Chepij(dau,i,j,dau1);
+	while(a != NULL && m!=k)
+	{
+		a = a->sau;
+		m = m+1;
+	}
+	if(a != NULL)
+	{ 
+		// a tro den dong k
+		b = dau1;
+		while(b->sau != NULL)
+		b = b->sau;
+		// b la dong cuoi cua ds dau1
+		w = a->sau; // dong sau dong k
+		a->sau = dau1;
+		dau1->truoc = a;
+		b->sau = w;
+		w->truoc = b;
+	}
 }
 int main(){
 	int k;
 	NhapVb(dau);
 	DuyetVb(dau);
-	Indongij(dau,2,3);
-	cout<<endl;
+	/*Indongij(dau,2,3);
+	cout<<"--------------------------------------"<<endl;
 	Chencuoi(dau);
 	DuyetVb(dau);
-	cout<<endl;
+	cout<<"-----------------------------------------------"<<endl;
 	 cout<<"\n xoa tu dong 3 den 4 \n";
 	 XoaDongij(dau,3,4);
+	DuyetVb(dau);*/
+	cout<<"--------------------------------------------------"<<endl;
+	cout<<"\n chen dong 3->7 vao sau dong 4 \n";
+	Chendongij(dau,3,7,4);
 	DuyetVb(dau);
-	cout<<endl;
-	Chepij(dau,3,4,7);
 
 }
 
