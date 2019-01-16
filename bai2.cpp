@@ -213,14 +213,14 @@ int main(){
 	int k;
 	NhapVb(dau);
 	DuyetVb(dau);
-	/*Indongij(dau,2,3);
+	Indongij(dau,2,3);
 	cout<<"--------------------------------------"<<endl;
 	Chencuoi(dau);
 	DuyetVb(dau);
 	cout<<"-----------------------------------------------"<<endl;
 	 cout<<"\n xoa tu dong 3 den 4 \n";
 	 XoaDongij(dau,3,4);
-	DuyetVb(dau);*/
+	DuyetVb(dau);
 	cout<<"--------------------------------------------------"<<endl;
 	cout<<"\n chen dong 3->7 vao sau dong 4 \n";
 	Chendongij(dau,3,7,4);
